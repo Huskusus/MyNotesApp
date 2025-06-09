@@ -49,13 +49,14 @@ fun Starter() {
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
                     actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
-            )},
+            )
+                     },
             content = { paddingValue->
                 Box(modifier = Modifier.padding(paddingValue),
                     contentAlignment = Alignment.Center)
                 {
                     NavController()
-                    Text(text="sdfsdfd")
+
                 }
             }
         )
