@@ -57,6 +57,9 @@ fun CreatingScreen(navController: NavHostController){
                 Button( modifier= Modifier.fillMaxWidth(),onClick = {navController.navigate(NavRoute.MainScreen.route)}) {
                     Text(text="Create new note")
                 }
+                Button(onClick = {}){
+
+                }
             }
         }
     }
