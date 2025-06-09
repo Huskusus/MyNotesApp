@@ -4,15 +4,20 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.mynotesapp.ui.theme.MyNotesAppTheme
@@ -23,6 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyNotesAppTheme {
                 Starter()
+
             }
     }
 }}
@@ -33,8 +39,9 @@ class MainActivity : ComponentActivity() {
 fun Starter() {
     MyNotesAppTheme {
         Scaffold(
+            modifier = Modifier.fillMaxSize(),
             topBar = {TopAppBar(
-                title = {Text(text="AAAAA")},
+                title = {Text(text="Мои заметки")},
                 colors = TopAppBarColors(
                     containerColor = Color.Blue,
                     scrolledContainerColor = MaterialTheme.colorScheme.onPrimary,
@@ -43,11 +50,12 @@ fun Starter() {
                     actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )},
-            content = {
-                NavController()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background) {}
+            content = { paddingValue->
+                Box(modifier = Modifier.padding(paddingValue),
+                    contentAlignment = Alignment.Center)
+                {
+                    NavController()
+                }
             }
         )
     }
