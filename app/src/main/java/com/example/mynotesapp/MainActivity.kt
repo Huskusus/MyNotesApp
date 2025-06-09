@@ -55,6 +55,7 @@ fun Starter() {
                     contentAlignment = Alignment.Center)
                 {
                     NavController()
+                    Text(text="sdfsdfd")
                 }
             }
         )
