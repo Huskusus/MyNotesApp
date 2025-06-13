@@ -17,13 +17,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
+import com.example.mynotesapp.MainViewModel
 import com.example.mynotesapp.NavRoute
+import com.example.mynotesapp.model.Note
 
 @Composable
-fun CreatingScreen(navController: NavHostController){
+fun CreatingScreen(navController: NavHostController, viewModel: MainViewModel){
     var title by remember {mutableStateOf("")}
     var subtitle by remember {mutableStateOf("")}
+    var stateOfButton by remember { mutableStateOf(false) }
     Scaffold{ paddingValue ->
         Box(
             modifier = Modifier.padding(paddingValue),
@@ -38,18 +42,30 @@ fun CreatingScreen(navController: NavHostController){
 
                 OutlinedTextField(
                     value = title,
-                    onValueChange = {title = it},
-                    label = {Text("Name")}
+                    onValueChange = {title = it
+                                    stateOfButton = title.isNotEmpty() && subtitle.isNotEmpty()},
+                    label = {Text("Name")},
+                    isError = title.isEmpty()
                 )
                 OutlinedTextField(
                     value = subtitle,
-                    onValueChange = {subtitle = it},
-                    label = {Text("Description")}
+                    onValueChange = {subtitle = it
+                        stateOfButton = title.isNotEmpty() && subtitle.isNotEmpty()},
+                    label = {Text("Description")},
+                    isError = subtitle.isEmpty()
                 )
-                Button( modifier= Modifier.fillMaxWidth(),onClick = {navController.navigate(NavRoute.MainScreen.route)}) {
+                Button(
+                    modifier= Modifier.fillMaxWidth(),
+                    onClick = {
+                    viewModel.addNote(note = Note(title=title, subtitle = subtitle)){
+                        navController.navigate(NavRoute.MainScreen.route)
+                    }},
+                    enabled = stateOfButton
+                ) {
                     Text(text="Create new note")
                 }
             }
         }
     }
 }
+

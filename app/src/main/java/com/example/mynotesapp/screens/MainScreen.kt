@@ -37,11 +37,8 @@ import com.example.mynotesapp.ui.theme.MyNotesAppTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(navController: NavHostController){
-    val context = LocalContext.current
-    val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-
-
+fun MainScreen(navController: NavHostController, viewModel: MainViewModel){
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { navController.navigate(NavRoute.CreatingScreen.route) }) {
@@ -50,7 +47,11 @@ fun MainScreen(navController: NavHostController){
         }
     )
     {
-
+        LazyColumn {
+            items(notes) {
+                note -> NoteOne(note=note, navController=navController)
+            }
+        }
     }
 }
 
@@ -59,7 +60,9 @@ fun MainScreen(navController: NavHostController){
 @Composable
 fun ReviewMainScr(){
     MyNotesAppTheme {
-        MainScreen(navController = rememberNavController())
+        val context = LocalContext.current
+        val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        MainScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }
 

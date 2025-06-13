@@ -25,7 +25,7 @@ import com.example.mynotesapp.constants.TYPE_FIREBASE
 import com.example.mynotesapp.constants.TYPE_ROOM
 
 @Composable
-fun StartScreen(navController: NavHostController) {
+fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
     val context = LocalContext.current
     val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
     Surface(

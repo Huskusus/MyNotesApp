@@ -17,12 +17,12 @@ sealed class NavRoute(val route: String){
 }
 
 @Composable
-fun NavController(){
+fun NavController(mViewModel: MainViewModel){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavRoute.StartScreen.route) {
-        composable(NavRoute.MainScreen.route) { MainScreen(navController = navController) }
-        composable(NavRoute.CreatingScreen.route) { CreatingScreen(navController = navController) }
-        composable(NavRoute.NoteScreen.route) { NoteScreen(navController = navController) }
-        composable(NavRoute.StartScreen.route) { StartScreen(navController = navController) }
+        composable(NavRoute.MainScreen.route) { MainScreen(navController = navController, viewModel = mViewModel) }
+        composable(NavRoute.CreatingScreen.route) { CreatingScreen(navController = navController, viewModel = mViewModel) }
+        composable(NavRoute.NoteScreen.route) { NoteScreen(navController = navController, viewModel = mViewModel) }
+        composable(NavRoute.StartScreen.route) { StartScreen(navController = navController, viewModel = mViewModel) }
     }
 }

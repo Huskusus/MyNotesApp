@@ -7,10 +7,10 @@ interface DataBaseRep {
 
     val readData: LiveData<List<Note>>
 
-    suspend fun create(note: Note, Process: () -> Unit)
+    suspend fun create(note: Note, onSuccess: () -> Unit)
 
-    suspend fun update(note: Note, Process: () -> Unit)
+    suspend fun update(note: Note, onSuccess: () -> Unit)
 
-    suspend fun delete(note: Note, Process: () -> Unit)
+    suspend fun delete(note: Note, onSuccess: () -> Unit)
 
 }

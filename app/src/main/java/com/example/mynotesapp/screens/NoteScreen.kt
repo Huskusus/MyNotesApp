@@ -1,5 +1,6 @@
 package com.example.mynotesapp.screens
 
+import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,17 +14,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.mynotesapp.MainViewModel
+import com.example.mynotesapp.MainViewModelFactory
 import com.example.mynotesapp.ui.theme.MyNotesAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteScreen(navController: NavHostController){
+fun NoteScreen(navController: NavHostController, viewModel: MainViewModel){
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         content = {paddingValue ->
@@ -54,6 +59,8 @@ fun NoteScreen(navController: NavHostController){
 @Composable
 fun ReviewNote(){
     MyNotesAppTheme {
-        CreatingScreen(navController = rememberNavController())
+        val context = LocalContext.current
+        val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        CreatingScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }

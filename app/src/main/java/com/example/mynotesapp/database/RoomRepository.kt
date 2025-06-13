@@ -10,23 +10,26 @@ class RoomRepository(private val noteDao: RoomDao): DataBaseRep {
 
     override suspend fun create(
         note: Note,
-        Process: () -> Unit
+        onSuccess: () -> Unit
     ) {
         noteDao.createN(note = note)
+        onSuccess()
     }
 
     override suspend fun update(
         note: Note,
-        Process: () -> Unit
+        onSuccess: () -> Unit
     ) {
         noteDao.updateN(note=note)
+        onSuccess()
     }
 
     override suspend fun delete(
         note: Note,
-        Process: () -> Unit
+        onSuccess: () -> Unit
     ) {
         noteDao.deleteN(note=note)
+        onSuccess()
     }
 
 }
