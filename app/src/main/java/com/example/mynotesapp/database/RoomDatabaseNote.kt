@@ -10,22 +10,22 @@ import com.example.mynotesapp.model.Note
 @Database(entities = [Note::class], version = 1)
 abstract class RoomDatabaseNote: RoomDatabase() {
 
-    abstract fun getDao(): RoomDao
+    abstract fun getRoomDao(): RoomDao
 
     companion object{
 
         @Volatile
-        private var INSTANCE: RoomDatabase? = null
+        private var INSTANCE: RoomDatabaseNote? = null
 
-        fun getInstance(context: Context): RoomDatabase{
+        fun getInstance(context: Context): RoomDatabaseNote{
             return if(INSTANCE == null){
                 INSTANCE = Room.databaseBuilder(
                     context,
-                    RoomDatabase::class.java,
+                    RoomDatabaseNote::class.java,
                     "base of notes"
                 ).build()
-                INSTANCE as RoomDatabase
-            } else INSTANCE as RoomDatabase
+                INSTANCE as RoomDatabaseNote
+            } else INSTANCE as RoomDatabaseNote
         }
     }
 }
