@@ -41,7 +41,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun deleteNote(note: Note, onSuccess: () -> Unit){
         viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.update(note = note){
+            REPOSITORY.delete(note = note){
                 viewModelScope.launch(Dispatchers.Main){
                     onSuccess()
                 }

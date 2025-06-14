@@ -1,15 +1,14 @@
 package com.example.mynotesapp.screens
 
 import android.app.Application
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -18,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,20 +56,26 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                         ) {
                             Text(note.title, fontSize = 24.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 15.dp))
                             Text(note.subtitle, fontSize = 14.sp, fontWeight = FontWeight.Normal, modifier = Modifier.padding(top = 10.dp))
-                        }
-                    }
-                    Button(modifier =
-                        Modifier.fillMaxWidth(),
-
-                        onClick = {
-                            viewModel.deleteNote(note=note) {
-                                navController.navigate(NavRoute.MainScreen.route)
+                            Button(modifier =
+                                Modifier.fillMaxWidth().padding(top = 20.dp),
+                                colors = ButtonColors(
+                                    containerColor = Color(0xFFFF4940),
+                                    contentColor = Color.White,
+                                    disabledContainerColor = Color.Green,
+                                    disabledContentColor = Color.Black
+                                ),
+                                onClick = {
+                                    viewModel.deleteNote(note=note) {
+                                        navController.navigate(NavRoute.MainScreen.route)
+                                    }
+                                }
+                            )
+                            {
+                                Text(text="Delete")
                             }
                         }
-                    )
-                    {
-                        Text(text="Delete")
                     }
+
                 }
             }
         }
