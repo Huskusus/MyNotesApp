@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mynotesapp.constants.Constants.Keys.BASE_OF_NOTE
 import com.example.mynotesapp.database.room.RoomDao
 import com.example.mynotesapp.model.Note
 
@@ -22,7 +23,7 @@ abstract class RoomDatabaseNote: RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(
                     context,
                     RoomDatabaseNote::class.java,
-                    "base of notes"
+                    BASE_OF_NOTE
                 ).build()
                 INSTANCE as RoomDatabaseNote
             } else INSTANCE as RoomDatabaseNote

@@ -23,14 +23,35 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotesapp.ui.theme.MyNotesAppTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyNotesAppTheme {
                 val context = LocalContext.current
                 val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {TopAppBar(
+                        title = {Text(text="Мои заметки")},
+                        colors = TopAppBarColors(
+                            containerColor = Color.Blue,
+                            scrolledContainerColor = MaterialTheme.colorScheme.onPrimary,
+                            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                            titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                            actionIconContentColor = MaterialTheme.colorScheme.onPrimary
+                        )
+                    )
+                    },
+                    content = { paddingValue->
+                        Box(modifier = Modifier.padding(paddingValue),
+                            contentAlignment = Alignment.Center)
+                        {
+                            NavController(mViewModel)
 
-                Starter(mViewModel)
+                        }
+                    }
+                )
 
             }
     }
@@ -41,27 +62,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Starter(mViewModel: MainViewModel) {
     MyNotesAppTheme {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            topBar = {TopAppBar(
-                title = {Text(text="Мои заметки")},
-                colors = TopAppBarColors(
-                    containerColor = Color.Blue,
-                    scrolledContainerColor = MaterialTheme.colorScheme.onPrimary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary
-                )
-            )
-                     },
-            content = { paddingValue->
-                Box(modifier = Modifier.padding(paddingValue),
-                    contentAlignment = Alignment.Center)
-                {
-                    NavController(mViewModel = mViewModel)
-
-                }
-            }
-        )
     }
 }

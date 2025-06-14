@@ -42,7 +42,10 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel){
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { navController.navigate(NavRoute.CreatingScreen.route) }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Here I write", modifier = Modifier.size(100.dp), tint = Color.White)
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Here I write",
+                    modifier = Modifier.size(100.dp), tint = Color.White)
             }
         }
     )
@@ -55,24 +58,13 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel){
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun ReviewMainScr(){
-    MyNotesAppTheme {
-        val context = LocalContext.current
-        val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-        MainScreen(navController = rememberNavController(), viewModel = mViewModel)
-    }
-}
-
 @Composable
 fun NoteOne(note: Note, navController: NavHostController){
 
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 8.dp, horizontal = 20.dp)
-        .clickable{navController.navigate(NavRoute.NoteScreen.route)},
+        .clickable{navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")},
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
     ){
         Column(
@@ -84,5 +76,15 @@ fun NoteOne(note: Note, navController: NavHostController){
                 )
             Text(text = note.subtitle)
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ReviewMainScr(){
+    MyNotesAppTheme {
+        val context = LocalContext.current
+        val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        MainScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }

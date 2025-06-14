@@ -1,5 +1,6 @@
 package com.example.mynotesapp.screens
 
+import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,11 +18,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.mynotesapp.MainViewModel
+import com.example.mynotesapp.MainViewModelFactory
 import com.example.mynotesapp.NavRoute
+import com.example.mynotesapp.constants.Constants.Keys.ADD_NOTE
+import com.example.mynotesapp.constants.Constants.Keys.CREATE_NOTE
 import com.example.mynotesapp.model.Note
+import com.example.mynotesapp.ui.theme.MyNotesAppTheme
 
 @Composable
 fun CreatingScreen(navController: NavHostController, viewModel: MainViewModel){
@@ -38,7 +47,7 @@ fun CreatingScreen(navController: NavHostController, viewModel: MainViewModel){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Addition note")
+                Text(text = ADD_NOTE)
 
                 OutlinedTextField(
                     value = title,
@@ -62,10 +71,18 @@ fun CreatingScreen(navController: NavHostController, viewModel: MainViewModel){
                     }},
                     enabled = stateOfButton
                 ) {
-                    Text(text="Create new note")
+                    Text(text=CREATE_NOTE)
                 }
             }
         }
     }
 }
-
+@Preview(showBackground = true)
+@Composable
+fun ReviewCreateScreen(){
+    MyNotesAppTheme {
+        val context = LocalContext.current
+        val mViewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        CreatingScreen(navController = rememberNavController(), viewModel = mViewModel)
+    }
+}

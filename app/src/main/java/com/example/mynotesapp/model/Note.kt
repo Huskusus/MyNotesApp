@@ -3,9 +3,10 @@ package com.example.mynotesapp.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.mynotesapp.constants.Constants.Keys.NOTE_TABLE
 
 
-@Entity(tableName = "note_table")
+@Entity(tableName = NOTE_TABLE)
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
