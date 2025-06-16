@@ -37,12 +37,23 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             }
         }
     }
+
     fun readAllNotes() = REPOSITORY.readData
 
     fun deleteNote(note: Note, onSuccess: () -> Unit){
         viewModelScope.launch(Dispatchers.IO) {
             REPOSITORY.delete(note = note){
                 viewModelScope.launch(Dispatchers.Main){
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun saveNote(note: Note, onSuccess: () -> Unit){
+        viewModelScope.launch(Dispatchers.IO){
+            REPOSITORY.update(note = note) {
+                viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }
             }

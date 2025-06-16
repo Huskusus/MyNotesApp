@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {TopAppBar(
-                        title = {Text(text="Мои заметки")},
+                        title = {Text(text="My notes")},
                         colors = TopAppBarColors(
                             containerColor = Color.Blue,
                             scrolledContainerColor = MaterialTheme.colorScheme.onPrimary,
@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
                             contentAlignment = Alignment.Center)
                         {
                             NavController(mViewModel)
-
                         }
                     }
                 )

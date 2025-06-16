@@ -31,5 +31,6 @@ fun NavController(mViewModel: MainViewModel){
         composable(NavRoute.StartScreen.route) { StartScreen(navController = navController, viewModel = mViewModel)}
         composable(NavRoute.NoteScreen.route + "/{${ID}}") {backStackEntry ->
             NoteScreen(navController = navController, viewModel = mViewModel, noteId = backStackEntry.arguments?.getString(ID)) }
+
     }
 }

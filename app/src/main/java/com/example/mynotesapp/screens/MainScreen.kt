@@ -63,9 +63,9 @@ fun NoteOne(note: Note, navController: NavHostController){
 
     Card(modifier = Modifier
         .fillMaxWidth()
-        .padding(vertical = 8.dp, horizontal = 20.dp)
-        .clickable{navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")},
+        .padding(vertical = 8.dp, horizontal = 20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+        onClick = {navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")}
     ){
         Column(
             modifier = Modifier.padding(vertical = 5.dp),
@@ -74,7 +74,8 @@ fun NoteOne(note: Note, navController: NavHostController){
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
                 )
-            Text(text = note.subtitle)
+            Text(text = note.subtitle.take(10) + "...",
+                maxLines = 1)
         }
     }
 }
